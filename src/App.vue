@@ -1,8 +1,5 @@
 <template>
   <div>
-    <h1>{{ $route.name }}</h1>
-    <router-link :to="{name: 'home'}">Main</router-link>
-    <router-link :to="{name: 'login'}">Login</router-link>
     <router-view />
   </div>
 </template>

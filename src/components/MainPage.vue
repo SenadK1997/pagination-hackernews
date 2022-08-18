@@ -1,9 +1,6 @@
 <template>
   <div>
-    {{ $store.state.count }}
-    <button @click="onIncrement">
-      INCREMENT
-    </button>
+    <router-link class="c-login" to="/login">Login</router-link>
   </div>
 </template>
 
@@ -20,5 +17,7 @@ export default {
 </script>
 
 <style scoped>
-
+.c-login {
+  font-size: 50px;
+}
 </style>
