@@ -6,20 +6,26 @@ import App from './App.vue'
 import './style.css'
 
 /* od linije 6 do 21 bi trebalo da stanuje u posebnom file-u, ali moze i ovako za sada */
-import LoginPage from './components/LoginPage.vue'
+import DetailPage from './components/DetailPage.vue'
 import MainPage from './components/MainPage.vue'
+import SingleArticle from './components/SingleArticle.vue'
 
 const routes = [
     {
-        path: '/login/',
-        name: 'login', // probaj uvijek da dajes imena rutama koja su slicna pathu jer ce biti lakse prepoznat rute i navigirati njima
-        component: LoginPage
+        path: '/details',
+        name: 'detail', // probaj uvijek da dajes imena rutama koja su slicna pathu jer ce biti lakse prepoznat rute i navigirati njima
+        component: DetailPage
     },
     {
         path: '/',
         name: 'home', // probaj uvijek da dajes imena rutama koja su slicna pathu jer ce biti lakse prepoznat rute i navigirati njima
         component: MainPage
-    }
+    },
+    {
+        path: '/detail/:id',
+        name: 'SingleArticle',
+        component: SingleArticle
+    },
 ];
 
 const router = new createRouter({

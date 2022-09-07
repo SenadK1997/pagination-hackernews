@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link class="c-login" to="/login">Login</router-link>
+    <router-link class="c-login" to="/details">More Details</router-link>
   </div>
 </template>
 
