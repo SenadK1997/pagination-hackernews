@@ -1,11 +1,11 @@
 <template>
     <section class="c-nav__filters">
         <div class="c-section__left">
-            <div class="c-section__left-news" @click="showNews">News</div>
-            <div @click="showShows">Show</div>
-            <div @click="showComments">Comments</div>
-            <div @click="showAsks">Ask</div>
-            <div @click="showJobs">Jobs</div>
+            <div class="c-section__left-news" @click="showNews = !showNews">News</div>
+            <div @click="showShows = !showShows">Show</div>
+            <div @click="showComments = !showComments">Comments</div>
+            <div @click="showAsks = !showAsks">Ask</div>
+            <div @click="showJobs = !showJobs">Jobs</div>
         </div>
         <div class="c-section__right">
             <div class="c-section__right-today">Today</div>
@@ -18,7 +18,7 @@
             <h1>Latest News of Today</h1>
         </div>
         <div class="c-section__list" :class="{ 'load__more': more }" ref="listContainer">
-            <div v-for="story in filteredData" :key="story" class="c-section__list__stories">
+            <div v-for="story in computedStories" :key="story" class="c-section__list__stories">
                 <div class="c-section__points" v-if="story.data && story.data.score">{{ story.data.score }}<div>POINTS</div></div>
                 <div class="c-section__comments">{{ story.data.descendants }}<div>COMMENTS</div></div>
 
@@ -58,6 +58,11 @@ export default {
             overflowText: "...",
             listLength: 11,
             search: null,
+            showComments: false,
+            showShows: false,
+            showJobs: false,
+            showNews: false,
+            showAsks: false
         };
     },
     created: function () {
@@ -106,6 +111,42 @@ export default {
                 return this.stories.slice(0, this.listLength);
             };
         },
+        
+        computedStories () {
+            let items = this.stories;
+            
+            if(this.showComments) {
+                return items.filter((item) => {
+                    console.log(item.data.type)
+                   return item.data.type === 'comment';
+                })
+            }
+            if(this.showAsks) {
+                return items.filter((item) => {
+                    return (
+                        item.data.type === 'story',
+                        item.data.title.includes('Ask')
+                    )
+                })
+            }
+            if(this.showNews) {
+                return items.filter((item) => {
+                    return item.data.type === 'story'
+                })
+            }
+            if(this.showShows) {
+                return this.stories.slice(0, this.listLength);
+            } 
+            if(this.showJobs) {
+                return items.filter((item) => {
+                    return item.data.type === 'job'
+                })
+            }
+            
+            else {
+                return this.stories.slice(0, this.listLength);
+            }
+        }
     },
     mounted() {
         let listContainer = this.$refs.listContainer;
