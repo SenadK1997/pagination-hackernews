@@ -1,11 +1,11 @@
 <template>
     <section class="c-nav__filters">
         <div class="c-section__left">
-            <div class="c-section__left-news" @click="showNews = !showNews">News</div>
-            <div @click="showShows = !showShows">Show</div>
-            <div @click="showComments = !showComments">Comments</div>
-            <div @click="showAsks = !showAsks">Ask</div>
-            <div @click="showJobs = !showJobs">Jobs</div>
+            <div class="c-section__left-news" @click="newsFilterActive">News</div>
+            <div @click="showsFilterActive">Show</div>
+            <div @click="commentsFilterActive">Comments</div>
+            <div @click="asksFilterActive">Ask</div>
+            <div @click="jobsFilterActive">Jobs</div>
         </div>
         <div class="c-section__right">
             <div class="c-section__right-today">Today</div>
@@ -30,7 +30,7 @@
                                 <a class="c-section__url"><router-link :to="{ path: '/detail/' + story.data.id}">url.com</router-link></a>
                         </div>
                     </div>
-                        <button class="c-section__button">{{ button }}</button>
+                        <button class="c-section__button"><router-link :to="{ path: '/detail/' + story.data.id}">Read more</router-link></button>
                 </div>
             </div>
         </div>
@@ -96,6 +96,41 @@ export default {
                 this.loadMore();
             }
         },
+        newsFilterActive() {
+            this.showComments = false,
+            this.showShows = false,
+            this.showJobs = false,
+            this.showNews = true,
+            this.showAsks = false
+        },
+        commentsFilterActive() {
+            this.showComments = true,
+            this.showShows = false,
+            this.showJobs = false,
+            this.showNews = false,
+            this.showAsks = false
+        },
+        showsFilterActive() {
+            this.showComments = false,
+            this.showShows = true,
+            this.showJobs = false,
+            this.showNews = false,
+            this.showAsks = false
+        },
+        jobsFilterActive() {
+            this.showComments = false,
+            this.showShows = false,
+            this.showJobs = true,
+            this.showNews = false,
+            this.showAsks = false
+        },
+        asksFilterActive() {
+            this.showComments = false,
+            this.showShows = false,
+            this.showJobs = false,
+            this.showNews = false,
+            this.showAsks = true
+        }
     },
     computed: {
         filteredData() {
@@ -219,7 +254,7 @@ export default {
     color: black;
 }
 .c-section__button {
-    background-color: #D2D2D2;
+    background-color: #C2C2C2;
     border-radius: 99px;
 }
 .c-buttons {
